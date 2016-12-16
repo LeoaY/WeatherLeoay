@@ -1,14 +1,15 @@
 package com.android.leoay.weatherleoay;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import util.HttpCallbackListener;
 import util.HttpUtil;
 import util.Utility;
@@ -16,6 +17,12 @@ import util.Utility;
 public class WeatherActivity extends Activity {
 
     private LinearLayout weatherInfoLayout;
+
+
+    /**
+     * 设置字体类型
+     */
+    private Typeface typeface;
 
     /**
      * 用于显示城市名
@@ -50,10 +57,17 @@ public class WeatherActivity extends Activity {
 
     private TextView currentDateText;
 
+
+    /**
+     * 选择城市TextView
+     * @param savedInstanceState
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_layout);
+        typeface = Typeface.createFromAsset(getAssets(), "fonts/fz.ttf");
         //初始化各控件
         weatherInfoLayout = (LinearLayout) findViewById(R.id.weather_info_layout);
         cityNameText = (TextView) findViewById(R.id.city_name);
@@ -62,6 +76,9 @@ public class WeatherActivity extends Activity {
         temp1Text  = (TextView) findViewById(R.id.temp1);
         temp2Text = (TextView) findViewById(R.id.temp2);
         currentDateText = (TextView) findViewById(R.id.current_date);
+
+        cityNameText.setTypeface(typeface);
+
         String countyCode = getIntent().getStringExtra("county_code");
         if(!TextUtils.isEmpty(countyCode)){
             //有县级代号就去查询天气
@@ -145,5 +162,28 @@ public class WeatherActivity extends Activity {
         currentDateText.setText(sharedPreferences.getString("current_date", ""));
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+    }
+
+
+    /**
+     * 切换城市
+     */
+    public void ChangeCity(View view){
+        Intent intent = new Intent(this, ChooseAreaActivity.class);
+        intent.putExtra("from_weather_activity", true);
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * 更新数据
+     */
+    public void UpdateWeather(View view){
+        publishText.setText("同步中...");
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String weatherCode = sharedPreferences.getString("weather_code", "");
+        if(!TextUtils.isEmpty(weatherCode)){
+            queryWeatherInfo(weatherCode);
+        }
     }
 }

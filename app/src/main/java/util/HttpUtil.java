@@ -23,8 +23,8 @@ public class HttpUtil {
                     URL url = new URL(address);
                     httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("GET");
-                    httpURLConnection.setConnectTimeout(8000);
-                    httpURLConnection.setReadTimeout(8000);
+                    httpURLConnection.setConnectTimeout(80000);
+                    httpURLConnection.setReadTimeout(80000);
                     InputStream inputStream = httpURLConnection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                     StringBuilder stringBuilder = new StringBuilder();

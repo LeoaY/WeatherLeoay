@@ -8,31 +8,50 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#000000"
+        android:background="#ffffff"
         >
+
+        <TextView
+            android:onClick="ChangeCity"
+            android:background="@drawable/home"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            />
 
         <TextView
             android:id="@+id/city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:textSize="30sp"
             />
+
+        <TextView
+            android:onClick="UpdateWeather"
+            android:background="@drawable/loop"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
+
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#4a5dd2"
+        android:background="#000000"
         >
         <TextView
             android:id="@+id/publish_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="hello"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:textColor="#fff"
