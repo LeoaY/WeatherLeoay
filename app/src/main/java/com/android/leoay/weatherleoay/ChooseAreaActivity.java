@@ -109,6 +109,7 @@ public class ChooseAreaActivity extends Activity {
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long arg3) {
+                Log.d(index+"" , "测试数据22");
                 if(currentLevel == LEVEL_PROVINCE){
                     selectedProvince = provinceList.get(index);
                     queryCities();
@@ -217,7 +218,7 @@ public class ChooseAreaActivity extends Activity {
                 }
                 if(result){
                     //通过runOnUIThread()方法回到主线程处理逻辑
-                    runOnUiThread(new Runnable() {
+                    runOnUiThread(lnew Runnable() {
                         @Override
                         public void run() {
                             closeProgressDialog();
